@@ -31,7 +31,6 @@ using UnityEngine;
 
 namespace QFramework
 {
-
     /// <summary>
     /// 默认的 ResData 支持
     /// </summary>
@@ -225,6 +224,10 @@ namespace QFramework
             {
                 Log.E("Failed Save AssetDataTable:" + outPath);
             }
+            #region 自定义修改，将asset_bindle_config.bin复制出去，便于自定义路径加载ab
+            string copyPath = FilePath.GetParentDir(FilePath.GetParentDir(Application.streamingAssetsPath))+ System.Text.RegularExpressions.Regex.Split(outPath, Application.streamingAssetsPath+"/",  System.Text.RegularExpressions.RegexOptions.IgnoreCase)[1];
+            File.Copy(outPath,copyPath);
+            #endregion
         }
 
         protected void SetSerizlizeData(SerializeData data)

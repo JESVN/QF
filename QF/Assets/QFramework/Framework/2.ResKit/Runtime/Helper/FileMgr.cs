@@ -4,6 +4,7 @@
 ****************************************************************************/
 
 
+using UnityEngine;
 
 namespace QFramework
 {
@@ -125,14 +126,17 @@ namespace QFramework
 			return fileInfo.OpenRead();
 		}
 
-		public void GetFileInInner(string fileName, List<string> outResult)
+		public void GetFileInInner(string fileName, List<string> outResult,string customPath=null)
 		{
 			#if UNITY_ANDROID && !UNITY_EDITOR
-			//Android 包内
-			GetFileInZip(mZipFile, fileName, outResult);
-			return;
+			//Android 如果是StreamingAssets的包内资源，则读取，否则读取自定义路径customPath的ab资源
+			if(string.IsNullOrEmpty(customPath))
+			{
+				GetFileInZip(mZipFile, fileName, outResult);
+				return;
+			}
 			#endif
-			FilePath.GetFileInFolder(FilePath.StreamingAssetsPath, fileName, outResult); 
+			FilePath.GetFileInFolder(string.IsNullOrEmpty(customPath)?FilePath.StreamingAssetsPath:customPath/*在这里自定义加载ab路径*/, fileName, outResult); 
 		}
 
 		public byte[] ReadSync(string fileRelativePath)
@@ -273,7 +277,6 @@ namespace QFramework
 		public void GetFileInZip(ZipFile zipFile, string fileName, List<string> outResult)
 		{
 			int totalCount = 0;
-
 			foreach (var entry in zipFile)
 			{
 				++totalCount;

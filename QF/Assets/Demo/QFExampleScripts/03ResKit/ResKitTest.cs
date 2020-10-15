@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 /// 1.优点：开发简便，开发模式和非开发模式的设计使得打包十分方便,资源加载的操作也十分简单，直接使用api即可，无需关心底层的实现
 /// 2.缺点：加载大型资源时无法获取实现进度，不过这个可以用Loading代替进度显示，也是一种解决方案
 /// 3.总体来说还行，中小型项目非热更项目可以使用，若是热更项目，建议使用XAsset或者等QF的热更
+/// 4.暂时还不知道怎么自定义加载ab包路径，可能需要修改源码，作者说可以自己通过继承IRes实现自定义加载ab(1.自定义路径加载ab已解决，在FileMgr脚本的GetFileInInner函数里,将Assets同级目录资源AssetBundles放在指定路径即可)
 /// </summary>
 public class ResKitTest : MonoBehaviour
 {
@@ -36,14 +37,19 @@ public class ResKitTest : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        //全局只需要初始化一次
-        ResMgr.Init();
-        loadGame.SetActive(false);
+        Debug.unityLogger.logEnabled = true;
     }
-
+    
+    void Start()
+    {
+        //全局只需要初始化一次
+        ResMgr.Init(FilePath.PersistentDataPath+"AssetBundles/");
+        loadGame.SetActive(false);
+        Debug.Log($"{FilePath.PersistentDataPath}");
+    }
     void OnGUI()
     {
-        if (GUI.Button(new Rect(0,0,150,50),"同步加载Png" ))
+        if (GUI.Button(new Rect(Screen.width/2,0,150,50),"同步加载Png" ))
         {
             foreach (var res in resPngName)
             {
@@ -53,14 +59,14 @@ public class ResKitTest : MonoBehaviour
                 spriteRenderer.sprite=LoadRes<Sprite>(res);
             }
         }
-        if (GUI.Button(new Rect(0,50,150,50),"同步加载audio" ))
+        if (GUI.Button(new Rect(Screen.width/2,50,150,50),"同步加载audio" ))
         {
             var game=new GameObject("sleepDifficulty");
             var audioSource=game.AddComponent<AudioSource>();
             audioSource.clip=LoadRes<AudioClip>("sleepDifficulty");
             audioSource.Play();
         }
-        if (GUI.Button(new Rect(0,100,150,50),"同步加载Prefab" ))
+        if (GUI.Button(new Rect(Screen.width/2,100,150,50),"同步加载Prefab" ))
         {
             foreach (var res in resPrefabName)
             {
@@ -68,7 +74,7 @@ public class ResKitTest : MonoBehaviour
                 game.transform.position = Random.insideUnitSphere * 5;
             }
         }
-        if (GUI.Button(new Rect(0,150,150,50),"异步加载单个audio" ))
+        if (GUI.Button(new Rect(Screen.width/2,150,150,50),"异步加载单个audio" ))
         {
             loadGame.SetActive(true);
             LoadResAsyn(resAudioName[2], () =>
@@ -80,7 +86,7 @@ public class ResKitTest : MonoBehaviour
                 loadGame.SetActive(false);
             });
         }
-        if (GUI.Button(new Rect(0,200,150,50),"异步加载audio队列" ))
+        if (GUI.Button(new Rect(Screen.width/2,200,150,50),"异步加载audio队列" ))
         {
             loadGame.SetActive(true);
             LoadResAsyn(resAudioName, () =>
@@ -95,27 +101,27 @@ public class ResKitTest : MonoBehaviour
                 loadGame.SetActive(false);
             });
         }
-        if (GUI.Button(new Rect(0,250,150,50),"同步加载scene" ))
+        if (GUI.Button(new Rect(Screen.width/2,250,150,50),"同步加载scene" ))
         {
             ResKitSceneLoad.Instance.SceneLoad("ResTest");
         }
-        if (GUI.Button(new Rect(0,300,150,50),"异步加载scene" ))
+        if (GUI.Button(new Rect(Screen.width/2,300,150,50),"异步加载scene" ))
         {
             ResKitSceneLoad.Instance.SceneLoadAsyn("ResKitScene",loadGame);
         }
-        if (GUI.Button(new Rect(0,350,150,50),"加载网络资源" ))
+        if (GUI.Button(new Rect(Screen.width/2,350,150,50),"加载网络资源" ))
         {
             LoaclAndRemoteLoadRes("http://file.liangxiegame.com/296b0166-bdea-47d5-ac87-4b55c91df16f.png");
         }
-        if (GUI.Button(new Rect(0,400,150,50),"加载本地资源" ))
+        if (GUI.Button(new Rect(Screen.width/2,400,150,50),"加载本地资源" ))
         {
             LoaclAndRemoteLoadRes("F:/FTP_Server/VideoImage_File/心灵之春.png");
         }
-        if (GUI.Button(new Rect(0,450,150,50),"加载Resources资源" ))
+        if (GUI.Button(new Rect(Screen.width/2,450,150,50),"加载Resources资源" ))
         {
             ResourcesLoadRes("辽阔海岸");
         }
-        if (GUI.Button(new Rect(0,500,150,50),"释放资源引用" ))
+        if (GUI.Button(new Rect(Screen.width/2,500,150,50),"释放资源引用" ))
         {
             DisposeRes();
         }

@@ -34,7 +34,6 @@ namespace QFramework
                 {
                     mAssetBundleConfigFile = mAssetBundleConfigFileFactory.Invoke();
                 }
-
                 return mAssetBundleConfigFile;
             }
             set { mAssetBundleConfigFile = value; }

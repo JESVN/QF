@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc19b0a422cd73842978010bbfe88a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressText: {fileID: 843194269}
   loadGame: {fileID: 38803492}
   resPngName:
   - Btn_Level1_h
@@ -210,7 +209,7 @@ RectTransform:
   m_GameObject: {fileID: 38803492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1725601393}
   - {fileID: 843194267}
@@ -250,7 +249,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &38803495
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -361,7 +360,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 800, y: 54.112736}
+  m_SizeDelta: {x: 800, y: 56}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &843194268
 MonoBehaviour:
