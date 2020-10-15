@@ -1,9 +1,7 @@
 Screen Logger for Unity 3D
 Version 1.1
 Giuseppe Portelli - giuseppe@aclockworkberry.com 
-
 Requires Unity 4.5 or higher.
-
 Screen Logger is a simple and fully customizable screen logger. Just put it on a scene and you will see on screen output for each call to Debug.Log/LogWarning/LogError. 
 
 Features
