@@ -1,1 +1,1 @@
-{"Namespace":"QFramework.Example","UIScriptDir":"/Scripts/UI","UIPrefabDir":"/Prefabs/UIPrefabs","DefaultViewControllerScriptDir":"/Scripts/Game","DefaultViewControllerPrefabDir":"/Prefabs/Game"}
+{"Namespace":"QFramework.Example","UIScriptDir":"/Demo/QFExampleScripts/04UIKit","UIPrefabDir":"/Prefabs/UIPrefabs/04UIKit","DefaultViewControllerScriptDir":"/Demo/QFExampleScripts/02ScriptGenerated","DefaultViewControllerPrefabDir":"/Prefabs/Game"}

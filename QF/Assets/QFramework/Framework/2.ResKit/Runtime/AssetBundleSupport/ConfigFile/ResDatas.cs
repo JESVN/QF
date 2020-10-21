@@ -226,7 +226,7 @@ namespace QFramework
             }
             #region 自定义修改，将asset_bindle_config.bin复制出去，便于自定义路径加载ab
             string copyPath = FilePath.GetParentDir(FilePath.GetParentDir(Application.streamingAssetsPath))+ System.Text.RegularExpressions.Regex.Split(outPath, Application.streamingAssetsPath+"/",  System.Text.RegularExpressions.RegexOptions.IgnoreCase)[1];
-            File.Copy(outPath,copyPath);
+            File.Copy(outPath,copyPath,true);
             #endregion
         }
 

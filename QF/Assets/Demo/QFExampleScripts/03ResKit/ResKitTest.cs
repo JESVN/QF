@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 /// 1.优点：开发简便，开发模式和非开发模式的设计使得打包十分方便,资源加载的操作也十分简单，直接使用api即可，无需关心底层的实现
 /// 2.缺点：加载大型资源时无法获取实现进度，不过这个可以用Loading代替进度显示，也是一种解决方案
 /// 3.总体来说还行，中小型项目非热更项目可以使用，若是热更项目，建议使用XAsset或者等QF的热更
-/// 4.暂时还不知道怎么自定义加载ab包路径，可能需要修改源码，作者说可以自己通过继承IRes实现自定义加载ab(1.自定义路径加载ab已解决，在FileMgr脚本的GetFileInInner函数里,将Assets同级目录资源AssetBundles放在指定路径即可)
+/// 4.暂时还不知道怎么自定义加载ab包路径，可能需要修改源码，作者说可以自己通过继承IRes实现自定义加载ab(1.自定义路径加载ab已解决，在FileMgr脚本的GetFileInInner函数里,将Assets同级目录资源AssetBundles放在指定加载路径即可)
 /// </summary>
 public class ResKitTest : MonoBehaviour
 {

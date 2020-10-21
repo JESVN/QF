@@ -2,6 +2,9 @@
 using UnityEngine;
 using QFramework;
 using UnityEngine.SceneManagement;
+/// <summary>
+/// 加载场景ab包不支持模拟模式，请打ab包并且取消模拟模式测试
+/// </summary>
 public class ResKitSceneLoad : MonoBehaviour
 {
     public static ResKitSceneLoad Instance;
