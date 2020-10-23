@@ -50,7 +50,8 @@ namespace QFramework
                     () => { CreateViewControllerCode.DoCreateCodeFromScene((target as ViewController).gameObject); })
                 .Height(30)
                 .AddTo(mRootLayout);
-
+            if (mCodeGenerateInfo == null)
+                return;
             if (mCodeGenerateInfo.ScriptsFolder.IsNullOrEmpty())
             {
                 var setting = UIKitSettingData.Load();

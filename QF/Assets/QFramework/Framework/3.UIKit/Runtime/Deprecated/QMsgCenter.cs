@@ -6,11 +6,9 @@
 
 using System;
 using System.Collections.Generic;
-
 namespace QFramework
 {
 	using UnityEngine;
-
 	[MonoSingletonPath("[Event]/QMsgCenter")]
 	public partial class QMsgCenter : MonoBehaviour, ISingleton
 	{
@@ -39,7 +37,6 @@ namespace QFramework
 
 		public void SendMsg(QMsg tmpMsg)
 		{
-
 			foreach (var manager in mRegisteredManagers)
 			{
 				if (manager.Key == tmpMsg.ManagerID)
@@ -48,7 +45,6 @@ namespace QFramework
 					return;
 				}
 			}
-
 			ForwardMsg(tmpMsg);
 		}
 
@@ -68,8 +64,6 @@ namespace QFramework
 				mRegisteredManagers.Add(mgrId, managerFactory);
 			}
 		}
-
-
 		partial void ForwardMsg(QMsg tmpMsg);
 	}
 }

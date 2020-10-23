@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Demo/QFExampleScenes/05Event.unity
-    guid: e95c1fbfcb9372f44aff26c223556d63
+    path: Assets/Demo/QFExampleScenes/08CommandMode_ActionKit.unity
+    guid: afc571dbd12f428479ecf8158bfdeae5
   m_configObjects: {}

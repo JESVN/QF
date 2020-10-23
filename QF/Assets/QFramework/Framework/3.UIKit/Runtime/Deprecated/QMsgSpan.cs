@@ -21,4 +21,8 @@ namespace QFramework
 		public const int FrameworkEnded = PCConnectMobile + QMsgSpan.Count;
 		public const int FrameworkMsgModuleCount = 7;
 	}
+	public partial class QMgrID
+	{
+		public const int Enemy = (FrameworkMsgModuleCount + 1) * QMsgSpan.Count;
+	}
 }
