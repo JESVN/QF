@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6634093780037115562}
   - component: {fileID: 3972321207347889431}
   - component: {fileID: 6175741506050930943}
-  - component: {fileID: 6963057472908428440}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -36,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 197, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6634093780037115562
 CanvasRenderer:
@@ -97,20 +96,6 @@ MonoBehaviour:
   ComponentGeneratePath: 
   CustomComment: 
   mComponentName: UnityEngine.UI.Text
---- !u!114 &6963057472908428440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982787396828940589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!1 &4822408388260357158
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4822408388796255719
@@ -442,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316e80724d1bea947bbfe19a5f8f1de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Namespace: 
   ScriptName: BtnController
   ScriptsFolder: Assets/Demo/QFExampleScripts/07MVX/01IOC_UniRx_MVC
   GeneratePrefab: 0
@@ -738,10 +724,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -809,6 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677a8675316e065488b348cb336b88eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Namespace: QFramework.Example
   ScriptName: IOC_UniRx_MVC
   ScriptsFolder: Assets/Demo/QFExampleScripts/07MVX/01IOC_UniRx_MVC
   GeneratePrefab: 1

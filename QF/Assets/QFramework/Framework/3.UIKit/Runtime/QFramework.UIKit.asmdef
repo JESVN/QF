@@ -3,11 +3,12 @@
     "references": [
         "QFramework.Singleton",
         "QFramework.Pool",
-        "QFramework.DataStructure",
         "QFramework.EventSystem",
         "QFramework.ResKit",
         "QFramework.CSharpExtension",
-        "QFramework.Core"
+        "QFramework.Table",
+        "QFramework.ManagerOfManagers",
+        "QFramework.ActionKit"
     ],
     "includePlatforms": [],
     "excludePlatforms": []

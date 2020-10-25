@@ -32,7 +32,6 @@ namespace QFramework.Example
         protected override void OnInit(QFramework.IUIData uiData)
         {
             mData = uiData as ClickPanelData ?? new ClickPanelData();
-            transform.SetSiblingIndex(-1);
             this.ClickColorButton.onClick.AddListener(() =>
             {
                 SendEvent(UIEventID.MenuPanel.ChangeMainColor);

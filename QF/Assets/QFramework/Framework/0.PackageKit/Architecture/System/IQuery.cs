@@ -1,6 +1,6 @@
 ﻿namespace QFramework
 {
-    public interface IQuery
+    public interface IQuery : ICanGetModel,ICanGetSystem
     {
         
     }

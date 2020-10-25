@@ -1,8 +1,9 @@
 /****************************************************************************
- * Copyright (c) 2017 ~ 2019.11 liangxie
+ * Copyright (c) 2017 ~ 2020.10 liangxie
  * 
- * http://qframework.io
+ * https://qframework.cn
  * https://github.com/liangxiegame/QFramework
+ * https://gitee.com/liangxiegame/QFramework
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +33,7 @@ namespace QFramework
     using System.Text.RegularExpressions;
     using System.Reflection;
     using System.Text;
+
 #if UNITY_5_6_OR_NEWER
     using UnityEngine;
     using UnityEngine.Events;
@@ -638,6 +640,7 @@ namespace QFramework
         }
 #endif
 
+
         /// <summary>
         /// 获取文件夹名
         /// </summary>
@@ -826,7 +829,28 @@ namespace QFramework
 
         #endregion
     }
+#if UNITY_5_6_OR_NEWER
+    /// <summary>
+    /// 简单的概率计算
+    /// </summary>
+    public static class ProbilityHelper
+    {
+        public static T RandomValueFrom<T>(params T[] values)
+        {
+            return values[UnityEngine.Random.Range(0, values.Length)];
+        }
 
+        /// <summary>
+        /// percent probability
+        /// </summary>
+        /// <param name="percent"> 0 ~ 100 </param>
+        /// <returns></returns>
+        public static bool PercentProbability(int percent)
+        {
+            return UnityEngine.Random.Range(0, 1000) * 0.001f < 50 * 0.01f;
+        }
+    }
+#endif
     /// <summary>
     /// 面向对象扩展（继承、封装、多态)
     /// </summary>
@@ -910,8 +934,8 @@ namespace QFramework
     {
         public static void Example()
         {
-            var selfType = ReflectionExtension.GetAssemblyCSharp().GetType("QFramework.ReflectionExtension");
-            selfType.LogInfo();
+            // var selfType = ReflectionExtension.GetAssemblyCSharp().GetType("QFramework.ReflectionExtension");
+            // selfType.LogInfo();
         }
 
         public static Assembly GetAssemblyCSharp()
@@ -1120,7 +1144,12 @@ namespace QFramework
         /// <returns></returns>
         public static bool IsTrimNotNullAndEmpty(this string selfStr)
         {
-            return !string.IsNullOrEmpty(selfStr.Trim());
+            return selfStr != null && !string.IsNullOrEmpty(selfStr.Trim());
+        }
+
+        public static bool IsTrimNullOrEmpty(this string selfStr)
+        {
+            return selfStr == null || string.IsNullOrEmpty(selfStr.Trim());
         }
 
         /// <summary>
@@ -2248,7 +2277,19 @@ namespace QFramework
 
         #region CETR010 Destroy All Child
 
+        [Obsolete("弃用啦 请使用 DestroyChildren")]
         public static T DestroyAllChild<T>(this T selfComponent) where T : Component
+        {
+            return selfComponent.DestroyChildren();
+        }
+
+        [Obsolete("弃用啦 请使用 DestroyChildren")]
+        public static GameObject DestroyAllChild(this GameObject selfGameObj)
+        {
+            return selfGameObj.DestroyChildren();
+        }
+
+        public static T DestroyChildren<T>(this T selfComponent) where T : Component
         {
             var childCount = selfComponent.transform.childCount;
 
@@ -2260,7 +2301,7 @@ namespace QFramework
             return selfComponent;
         }
 
-        public static GameObject DestroyAllChild(this GameObject selfGameObj)
+        public static GameObject DestroyChildren(this GameObject selfGameObj)
         {
             var childCount = selfGameObj.transform.childCount;
 

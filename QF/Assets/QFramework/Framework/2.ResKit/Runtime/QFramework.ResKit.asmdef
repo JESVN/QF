@@ -4,10 +4,13 @@
         "QFramework.Singleton",
         "QFramework.RefCounter",
         "QFramework.Pool",
-        "QFramework.DataStructure",
-        "QFramework.Core",
-        "QFramework.Core.Serialize",
-        "QFramework.Architecture"
+        "QFramework.Table",
+        "QFramework.Architecture",
+        "QFramework.JsonSerialize",
+        "QFramework.IOC",
+        "QFramework.BinarySerializer",
+        "QFramework.Zip",
+        "QFramework.ActionKit"
     ],
     "includePlatforms": [],
     "excludePlatforms": []

@@ -3,6 +3,8 @@
 	"references": [
 		"QFramework.IOC",
 		"QFramework.TypeEventSystem",
-		"QFramework.BindableProperty"
+		"QFramework.BindableProperty",
+		"QFramework.Singleton",
+		"QFramework.Disposable"
 	]
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using QFramework;
+using Action = System.Action;
 using Random = UnityEngine.Random;
 /// <summary>
 /// ResKit模块：

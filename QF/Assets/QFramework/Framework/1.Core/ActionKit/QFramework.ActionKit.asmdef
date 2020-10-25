@@ -3,7 +3,13 @@
     "references": [
         "QFramework.Pool",
         "QFramework.Singleton",
-        "QFramework.DataStructure"
+        "QFramework.Disposable",
+        "QFramework.Table",
+        "QFramework.Architecture",
+        "QFramework.IOC",
+        "QFramework.BindableProperty",
+        "QFramework.CSharpExtension",
+        "QFramework.EasyIMGUI"
     ],
     "includePlatforms": [],
     "excludePlatforms": []

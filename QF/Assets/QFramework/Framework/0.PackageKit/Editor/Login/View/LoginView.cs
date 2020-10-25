@@ -1,33 +1,37 @@
-namespace QFramework.PackageKit
+namespace QFramework
 {
     public class LoginView : VerticalLayout
     {
+        ControllerNode<PackageKitLoginApp> mController = ControllerNode<PackageKitLoginApp>.Allocate();
+
+
         public LoginView()
         {
             var usernameLine = new HorizontalLayout().AddTo(this);
-            new LabelView("username:").AddTo(usernameLine);
-            var username = new TextView("").AddTo(usernameLine);
+            EasyIMGUI.Label().Text("username:").AddTo(usernameLine);
+
+            var username = EasyIMGUI.TextField()
+                .AddTo(usernameLine);
 
             var passwordLine = new HorizontalLayout().AddTo(this);
-            new LabelView("password:").AddTo(passwordLine);
-            var password = new TextView("").PasswordMode().AddTo(passwordLine);
-            
-            var loginBtn = new ButtonView("登录").AddTo(this);
-            var registerBtn = new ButtonView("注册").AddTo(this);
+            EasyIMGUI.Label().Text("password:").AddTo(passwordLine);
+            var password = EasyIMGUI.TextField().PasswordMode().AddTo(passwordLine);
 
-            loginBtn.OnClick.AddListener(() =>
-            {
-                PackageKitLoginApp.Send(new LoginCommand(username.Content.Value,password.Content.Value));
-            });
+            EasyIMGUI.Button()
+                .Text("登录")
+                .OnClick(() => { mController.SendCommand(new LoginCommand(username.Content.Value, password.Content.Value)); })
+                .AddTo(this);
 
-            registerBtn.OnClick.AddListener(() =>
-            {
-                PackageKitLoginApp.Send<OpenRegisterWebsiteCommand>();
-            });
+            EasyIMGUI.Button()
+                .Text("注册")
+                .OnClick(() => { mController.SendCommand<OpenRegisterWebsiteCommand>(); })
+                .AddTo(this);
         }
 
         protected override void OnDisposed()
         {
+            mController.Recycle2Cache();
+            mController = null;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace QFramework
     /// <summary>
     /// 默认的 ResData 支持
     /// </summary>
-    public class ResDatas: IResDatas
+    public class ResDatas : IResDatas
     {
         [Serializable]
         public class SerializeData
@@ -47,12 +47,12 @@ namespace QFramework
                 set { mAssetDataGroup = value; }
             }
         }
-        
+
         public virtual string FileName
         {
             get { return "asset_bindle_config.bin"; }
         }
-        
+
         public IList<AssetDataGroup> AllAssetDataGroups
         {
             get { return mAllAssetDataGroup; }
@@ -61,8 +61,10 @@ namespace QFramework
         protected readonly List<AssetDataGroup> mAllAssetDataGroup = new List<AssetDataGroup>();
 
         private AssetDataTable mAssetDataTable = null;
-        
-        public ResDatas(){}
+
+        public ResDatas()
+        {
+        }
 
         public void Reset()
         {
@@ -111,8 +113,8 @@ namespace QFramework
 
         public string[] GetAllDependenciesByUrl(string url)
         {
-			var abName = AssetBundleSettings.AssetBundleUrl2Name(url);
-            
+            var abName = AssetBundleSettings.AssetBundleUrl2Name(url);
+
             for (var i = mAllAssetDataGroup.Count - 1; i >= 0; --i)
             {
                 string[] depends;
@@ -126,14 +128,14 @@ namespace QFramework
 
             return null;
         }
-        
 
-        public AssetData  GetAssetData(ResSearchKeys resSearchKeys)
+
+        public AssetData GetAssetData(ResSearchKeys resSearchKeys)
         {
             if (mAssetDataTable == null)
             {
                 mAssetDataTable = new AssetDataTable();
-                
+
                 for (var i = mAllAssetDataGroup.Count - 1; i >= 0; --i)
                 {
                     foreach (var assetData in mAllAssetDataGroup[i].AssetDatas)
@@ -148,7 +150,11 @@ namespace QFramework
 
         public virtual void LoadFromFile(string path)
         {
-			var data = SerializeHelper.DeserializeBinary(FileMgr.Instance.OpenReadStream(path));
+            var binarySerializer = ResKit.Interface.GetUtility<IBinarySerializer>();
+            var zipFileHelper = ResKit.Interface.GetUtility<IZipFileHelper>();
+
+            var data = binarySerializer
+                .DeserializeBinary(zipFileHelper.OpenReadStream(path));
 
             if (data == null)
             {
@@ -183,7 +189,8 @@ namespace QFramework
 
                 var stream = new MemoryStream(www.bytes);
 
-                var data = SerializeHelper.DeserializeBinary(stream);
+                var data = ResKit.Interface.GetUtility<IBinarySerializer>()
+                    .DeserializeBinary(stream);
 
                 if (data == null)
                 {
@@ -216,7 +223,8 @@ namespace QFramework
                 sd.AssetDataGroup[i] = mAllAssetDataGroup[i].GetSerializeData();
             }
 
-            if (SerializeHelper.SerializeBinary(outPath, sd))
+            if (ResKit.Interface.GetUtility<IBinarySerializer>()
+                .SerializeBinary(outPath, sd))
             {
                 Log.I("Success Save AssetDataTable:" + outPath);
             }
@@ -224,10 +232,12 @@ namespace QFramework
             {
                 Log.E("Failed Save AssetDataTable:" + outPath);
             }
-            #region 自定义修改，将asset_bindle_config.bin复制出去，便于自定义路径加载ab
-            string copyPath = FilePath.GetParentDir(FilePath.GetParentDir(Application.streamingAssetsPath))+ System.Text.RegularExpressions.Regex.Split(outPath, Application.streamingAssetsPath+"/",  System.Text.RegularExpressions.RegexOptions.IgnoreCase)[1];
-            File.Copy(outPath,copyPath,true);
-            #endregion
+            string path=System.Text.RegularExpressions.Regex.Split(outPath, "Assets",
+                            System.Text.RegularExpressions.RegexOptions.IgnoreCase)[0] +
+                        System.Text.RegularExpressions.Regex.Split(outPath, "StreamingAssets//",
+                            System.Text.RegularExpressions.RegexOptions.IgnoreCase)[1];
+            File.Copy(outPath, path, true);
+            Debug.Log($"已复制到：{path}");
         }
 
         protected void SetSerizlizeData(SerializeData data)
@@ -241,7 +251,7 @@ namespace QFramework
             {
                 mAllAssetDataGroup.Add(BuildAssetDataGroup(data.AssetDataGroup[i]));
             }
-            
+
             if (mAssetDataTable == null)
             {
                 mAssetDataTable = new AssetDataTable();
@@ -302,6 +312,5 @@ namespace QFramework
 
             return key;
         }
-
     }
 }

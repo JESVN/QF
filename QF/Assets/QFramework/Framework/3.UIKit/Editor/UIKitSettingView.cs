@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2019.1 liangxie
+ * Copyright 2019.1 ~ 2020.10 liangxie
  * 
  * http://qframework.io
  * https://github.com/liangxiegame/QFramework
@@ -30,6 +30,7 @@ namespace QFramework
 {
     [DisplayName("UIKit 设置")]
     [PackageKitRenderOrder(3)]
+    [PackageKitGroup("QFramework")]
     public class UIKitSettingView : VerticalLayout, IPackageKitView
     {
         private UIKitSettingData mUiKitSettingData;
@@ -56,121 +57,119 @@ namespace QFramework
         private VerticalLayout mRootLayout = null;
 
         private UIKitSettingViewModel mViewModel;
-        
+
         public void Init(IQFrameworkContainer container)
         {
             mViewModel = new UIKitSettingViewModel();
 
-            new LabelView(LocaleText.UIKitSettings).FontSize(12).AddTo(this);
+            EasyIMGUI.Label().Text(LocaleText.UIKitSettings).FontSize(12).AddTo(this);
 
             mRootLayout = new VerticalLayout("box").AddTo(this);
 
-            mRootLayout.AddChild(new SpaceView(6));
+            mRootLayout.AddChild(EasyIMGUI.Space().Pixel(6));
 
             // 命名空间
             var nameSpaceLayout = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.Namespace)
+            EasyIMGUI.Label().Text(LocaleText.Namespace)
                 .FontSize(12)
                 .FontBold()
                 .Width(200)
                 .AddTo(nameSpaceLayout);
 
-            new TextView(mUiKitSettingData.Namespace)
+            EasyIMGUI.TextField().Text(mUiKitSettingData.Namespace)
                 .AddTo(nameSpaceLayout)
                 .Content.Bind(content => mUiKitSettingData.Namespace = content);
 
             // UI 生成的目录
-            new SpaceView(6)
+            EasyIMGUI.Space().Pixel(6)
                 .AddTo(mRootLayout);
 
             var uiScriptGenerateDirLayout = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.UIScriptGenerateDir)
+            EasyIMGUI.Label().Text(LocaleText.UIScriptGenerateDir)
                 .FontSize(12)
                 .FontBold()
                 .Width(200)
                 .AddTo(uiScriptGenerateDirLayout);
 
-            new TextView(mUiKitSettingData.UIScriptDir)
+            EasyIMGUI.TextField().Text(mUiKitSettingData.UIScriptDir)
                 .AddTo(uiScriptGenerateDirLayout)
                 .Content.Bind(content => mUiKitSettingData.UIScriptDir = content);
-            
-            mRootLayout.AddChild(new SpaceView(6));
+
+            mRootLayout.AddChild(EasyIMGUI.Space().Pixel(6));
 
             var uiPanelPrefabDir = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.UIPanelPrefabDir)
+            EasyIMGUI.Label().Text(LocaleText.UIPanelPrefabDir)
                 .FontSize(12)
                 .FontBold()
                 .Width(200)
                 .AddTo(uiPanelPrefabDir);
 
-            new TextView(mUiKitSettingData.UIPrefabDir)
+            EasyIMGUI.TextField().Text(mUiKitSettingData.UIPrefabDir)
                 .AddTo(uiPanelPrefabDir)
                 .Content.Bind(content => mUiKitSettingData.UIPrefabDir = content);
 
-            mRootLayout.AddChild(new SpaceView(6));
-            
+            mRootLayout.AddChild(EasyIMGUI.Space().Pixel(6));
+
             // UI 生成的目录
-            new SpaceView(6)
+            EasyIMGUI.Space().Pixel(6)
                 .AddTo(mRootLayout);
 
             var viewControllerScriptGenerateDirLayout = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.ViewControllerScriptGenerateDir)
+            EasyIMGUI.Label().Text(LocaleText.ViewControllerScriptGenerateDir)
                 .FontSize(12)
                 .FontBold()
                 .Width(200)
                 .AddTo(viewControllerScriptGenerateDirLayout);
 
-            new TextView(mUiKitSettingData.DefaultViewControllerScriptDir)
+            EasyIMGUI.TextField().Text(mUiKitSettingData.DefaultViewControllerScriptDir)
                 .AddTo(viewControllerScriptGenerateDirLayout)
                 .Content.Bind(content => mUiKitSettingData.DefaultViewControllerScriptDir = content);
 
 
-            mRootLayout.AddChild(new SpaceView(6));
+            mRootLayout.AddChild(EasyIMGUI.Space().Pixel(6));
 
             var viewControllerPrefabDir = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.ViewControllerPrefabGenerateDir)
+            EasyIMGUI.Label().Text(LocaleText.ViewControllerPrefabGenerateDir)
                 .FontSize(12)
                 .FontBold()
                 .Width(220)
                 .AddTo(viewControllerPrefabDir);
 
-            new TextView(mUiKitSettingData.DefaultViewControllerPrefabDir)
+            EasyIMGUI.TextField().Text(mUiKitSettingData.DefaultViewControllerPrefabDir)
                 .AddTo(viewControllerPrefabDir)
                 .Content.Bind(content => mUiKitSettingData.DefaultViewControllerPrefabDir = content);
 
-            mRootLayout.AddChild(new SpaceView(6));
+            mRootLayout.AddChild(EasyIMGUI.Space().Pixel(6));
 
             // 保存数据
-            new ButtonView(LocaleText.Apply, () => { mUiKitSettingData.Save(); })
+            EasyIMGUI.Button()
+                .Text(LocaleText.Apply)
+                .OnClick(() => { mUiKitSettingData.Save(); })
                 .AddTo(mRootLayout);
 
-
-            new TextView(mViewModel.PanelNameToCreate)
+            EasyIMGUI.TextField().Text(mViewModel.PanelNameToCreate)
                 .AddTo(mRootLayout)
-                .Do(text =>
-                {
-                    text.Content.Bind(txt => mViewModel.PanelNameToCreate = txt);
-                });
+                .Do(text => { text.Content.Bind(txt => mViewModel.PanelNameToCreate = txt); });
 
             // 创建 UI 界面 按钮的绑定
-            new ButtonView(LocaleText.CreateUIPanel)
+            EasyIMGUI.Button()
+                .Text(LocaleText.CreateUIPanel)
                 .AddTo(mRootLayout)
-                .Do(btn => btn.OnClick.AddListener(() => { mViewModel.OnCreateUIPanelClick(); }));
+                .Do(btn => btn.OnClick(() => { mViewModel.OnCreateUIPanelClick(); }));
         }
 
         public void OnUpdate()
         {
-
         }
 
         private bool ShowLabel2;
@@ -182,6 +181,16 @@ namespace QFramework
 
         public void OnDispose()
         {
+        }
+
+        public new void OnShow()
+        {
+            
+        }
+
+        public new void OnHide()
+        {
+            
         }
 
         class LocaleText
@@ -203,10 +212,7 @@ namespace QFramework
 
             public static string ViewControllerScriptGenerateDir
             {
-                get
-                {
-                    return Language.IsChinese ? " ViewController 脚本生成路径:" : " Default ViewController Generate Dir:";
-                }
+                get { return Language.IsChinese ? " ViewController 脚本生成路径:" : " Default ViewController Generate Dir:"; }
             }
 
             public static string ViewControllerPrefabGenerateDir

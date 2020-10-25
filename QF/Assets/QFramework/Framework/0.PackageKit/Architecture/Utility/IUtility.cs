@@ -1,7 +1,6 @@
 namespace QFramework
 {
-    public interface IUtility
+    public interface IUtility 
     {
-        
     }
 }

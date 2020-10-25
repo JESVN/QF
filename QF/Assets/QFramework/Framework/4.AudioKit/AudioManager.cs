@@ -31,7 +31,9 @@ namespace QFramework
 {
     using System.Collections.Generic;
     using UnityEngine;
+
     #region 消息id定义
+
     public enum AudioEvent
     {
         Began = QMgrID.Audio,
@@ -55,7 +57,9 @@ namespace QFramework
         RemoveRetainAudioAudio,
         Ended
     }
+
     #endregion
+
     /// <summary>
     /// TODO:目前,不支持本地化
     /// </summary>

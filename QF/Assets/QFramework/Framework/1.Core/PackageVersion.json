@@ -1,1 +1,19 @@
-{"Id":"","Version":"v0.10.15","Type":0,"AccessRight":0,"DownloadUrl":"","InstallPath":"Assets/QFramework/Framework/1.Core/","DocUrl":"http://lianxiegame.com","Readme":{"version":"v0.10.15","content":"add do if not null","author":"liangxie","date":"2020 年 09 月 09 日 21:38","PackageId":""}}
+{
+    "Id": "",
+    "Version": "v0.10.17",
+    "Type": 0,
+    "AccessRight": 0,
+    "DownloadUrl": "",
+    "InstallPath": "Assets/QFramework/Framework/1.Core/",
+    "IncludeFileOrFolders": [
+        "Assets/QFramework/Framework/1.Core"
+    ],
+    "DocUrl": "http://lianxiegame.com",
+    "Readme": {
+        "version": "v0.10.17",
+        "content": "Async=>AsyncNode",
+        "author": "liangxie",
+        "date": "2020 年 10 月 22 日 09:17",
+        "PackageId": ""
+    }
+}

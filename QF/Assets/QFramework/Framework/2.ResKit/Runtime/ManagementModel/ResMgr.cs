@@ -38,13 +38,11 @@ namespace QFramework
         #region ID:RKRM001 Init v0.1.0 Unity5.5.1p4
 
         private static bool mResMgrInited = false;
-        
+
         /// <summary>
-        /// 1.初始化bin文件
-        /// 2.如果customPath路径为空，则StreamingAssets包内必须有资源，默认资源存储在StreamingAssets路径下
+        /// 初始化bin文件
         /// </summary>
-        /// <param name="customPath">自定义路径加载ab(AssetBundles目录)</param>
-        public static void Init(string customPath = null)
+        public static void Init(string path=null)
         {
             if (mResMgrInited) return;
             mResMgrInited = true;
@@ -57,7 +55,7 @@ namespace QFramework
             SafeObjectPool<ResLoader>.Instance.Init(40, 20);
 
 
-            Instance.InitResMgr(customPath);
+            Instance.InitResMgr(path);
         }
 
 
@@ -87,9 +85,9 @@ namespace QFramework
 
         private ResTable mTable = new ResTable();
 
-        [SerializeField] private int mCurrentCoroutineCount;
-        private int mMaxCoroutineCount = 8; //最快协成大概在6到8之间
-        private LinkedList<IEnumeratorTask> mIEnumeratorTaskStack = new LinkedList<IEnumeratorTask>();
+        [SerializeField] private int                         mCurrentCoroutineCount;
+        private                  int                         mMaxCoroutineCount    = 8; //最快协成大概在6到8之间
+        private                  LinkedList<IEnumeratorTask> mIEnumeratorTaskStack = new LinkedList<IEnumeratorTask>();
 
         //Res 在ResMgr中 删除的问题，ResMgr定时收集列表中的Res然后删除
         private bool mIsResMapDirty;
@@ -118,16 +116,14 @@ namespace QFramework
                 if (AssetBundleSettings.LoadAssetResFromStreammingAssetsPath)
                 {
                     string streamingPath = Application.streamingAssetsPath + "/AssetBundles/" +
-                                           AssetBundleSettings.GetPlatformName() + "/" +
-                                           AssetBundleSettings.AssetBundleConfigFile.FileName;
+                                           AssetBundleSettings.GetPlatformName() + "/" +  AssetBundleSettings.AssetBundleConfigFile.FileName;
                     outResult.Add(pathPrefix + streamingPath);
                 }
                 // 进行过热更
                 else
                 {
                     string persistenPath = Application.persistentDataPath + "/AssetBundles/" +
-                                           AssetBundleSettings.GetPlatformName() + "/" +
-                                           AssetBundleSettings.AssetBundleConfigFile.FileName;
+                                           AssetBundleSettings.GetPlatformName() + "/" +  AssetBundleSettings.AssetBundleConfigFile.FileName;
                     outResult.Add(pathPrefix + persistenPath);
                 }
 
@@ -141,7 +137,7 @@ namespace QFramework
             }
         }
 
-        public void InitResMgr(string customPath = null)
+        public void InitResMgr(string path=null)
         {
 #if UNITY_EDITOR
             if (AssetBundleSettings.SimulateAssetBundleInEditor)
@@ -158,14 +154,13 @@ namespace QFramework
                 // 未进行过热更
                 if (AssetBundleSettings.LoadAssetResFromStreammingAssetsPath)
                 {
-                    FileMgr.Instance.GetFileInInner(AssetBundleSettings.AssetBundleConfigFile.FileName, outResult,
-                        customPath);
+                    ResKit.Interface.GetUtility<IZipFileHelper>()
+                        .GetFileInInner(AssetBundleSettings.AssetBundleConfigFile.FileName, outResult,path);
                 }
                 // 进行过热更
                 else
                 {
-                    FilePath.GetFileInFolder(FilePath.PersistentDataPath,
-                        AssetBundleSettings.AssetBundleConfigFile.FileName, outResult);
+                    FilePath.GetFileInFolder(FilePath.PersistentDataPath, AssetBundleSettings.AssetBundleConfigFile.FileName, outResult);
                 }
 
                 foreach (var outRes in outResult)
@@ -307,5 +302,6 @@ namespace QFramework
         }
 
         #endregion
+
     }
 }

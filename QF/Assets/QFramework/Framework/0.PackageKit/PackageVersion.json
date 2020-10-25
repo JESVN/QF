@@ -1,1 +1,19 @@
-{"Id":"","Version":"v0.11.11","Type":0,"AccessRight":0,"DownloadUrl":"","InstallPath":"Assets/QFramework/Framework/0.PackageKit/","DocUrl":"http://lianxiegame.com","Readme":{"version":"v0.11.11","content":"修复一大堆 warning 的问题","author":"liangxie","date":"2020 年 09 月 09 日 11:35","PackageId":""}}
+{
+    "Id": "",
+    "Version": "v0.13.2",
+    "Type": 0,
+    "AccessRight": 0,
+    "DownloadUrl": "",
+    "InstallPath": "Assets/QFramework/Framework/0.PackageKit/",
+    "IncludeFileOrFolders": [
+        "Assets/QFramework/Framework/0.PackageKit"
+    ],
+    "DocUrl": "http://lianxiegame.com",
+    "Readme": {
+        "version": "v0.13.2",
+        "content": "发布时 显示旧版本的文件选择",
+        "author": "liangxie",
+        "date": "2020 年 10 月 21 日 23:57",
+        "PackageId": ""
+    }
+}

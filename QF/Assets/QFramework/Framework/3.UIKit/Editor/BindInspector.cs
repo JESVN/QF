@@ -51,7 +51,7 @@ namespace QFramework
             get { return target as Bind; }
         }
 
-        private VerticalLayout   mRootLayout;
+        private VerticalLayout mRootLayout;
         private HorizontalLayout mComponentLine;
         private HorizontalLayout mClassnameLine;
 
@@ -59,13 +59,13 @@ namespace QFramework
         {
             mRootLayout = new VerticalLayout("box");
 
-            new SpaceView()
+            EasyIMGUI.Space()
                 .AddTo(mRootLayout);
 
             var markTypeLine = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.MarkType)
+            EasyIMGUI.Label().Text(LocaleText.MarkType)
                 .FontSize(12)
                 .Width(60)
                 .AddTo(markTypeLine);
@@ -81,10 +81,10 @@ namespace QFramework
             });
 
 
-            new SpaceView()
+            EasyIMGUI.Space()
                 .AddTo(mRootLayout);
 
-            new CustomView(() =>
+            EasyIMGUI.Custom().OnGUI(() =>
             {
                 if (mBindScript.CustomComponentName == null ||
                     string.IsNullOrEmpty(mBindScript.CustomComponentName.Trim()))
@@ -96,14 +96,13 @@ namespace QFramework
 
             mComponentLine = new HorizontalLayout();
 
-            new LabelView(LocaleText.Type)
+            EasyIMGUI.Label().Text(LocaleText.Type)
                 .Width(60)
                 .FontSize(12)
                 .AddTo(mComponentLine);
 
             if (mBindScript.MarkType == BindType.DefaultUnityElement)
             {
-
                 var components = mBindScript.GetComponents<Component>();
 
                 var componentNames = components.Where(c => c.GetType() != typeof(Bind))
@@ -119,7 +118,7 @@ namespace QFramework
                 {
                     componentNameIndex = 0;
                 }
-                
+
                 mBindScript.ComponentName = componentNames[componentNameIndex];
 
                 new PopupView(componentNameIndex, componentNames)
@@ -128,26 +127,27 @@ namespace QFramework
             }
 
             mComponentLine.AddTo(mRootLayout);
-            
 
-            new SpaceView()
+            EasyIMGUI.Space()
                 .AddTo(mRootLayout);
 
             var belongsTo = new HorizontalLayout()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.BelongsTo)
+            EasyIMGUI.Label().Text(LocaleText.BelongsTo)
                 .Width(60)
                 .FontSize(12)
                 .AddTo(belongsTo);
 
-            new LabelView(CodeGenUtil.GetBindBelongs2(target as Bind))
+            EasyIMGUI.Label().Text(CodeGenUtil.GetBindBelongs2(target as Bind))
                 .Width(200)
                 .FontSize(12)
                 .AddTo(belongsTo);
 
 
-            new ButtonView(LocaleText.Select, () =>
+            EasyIMGUI.Button()
+                .Text(LocaleText.Select)
+                .OnClick(() =>
                 {
                     Selection.objects = new[]
                     {
@@ -159,28 +159,29 @@ namespace QFramework
 
             mClassnameLine = new HorizontalLayout();
 
-            new LabelView(LocaleText.ClassName)
+            EasyIMGUI.Label().Text(LocaleText.ClassName)
                 .Width(60)
                 .FontSize(12)
                 .AddTo(mClassnameLine);
 
-            new TextView(mBindScript.CustomComponentName)
+            EasyIMGUI.TextField().Text(mBindScript.CustomComponentName)
                 .AddTo(mClassnameLine)
                 .Content.Bind(newValue => { mBindScript.CustomComponentName = newValue; });
 
             mClassnameLine.AddTo(mRootLayout);
 
-            new SpaceView()
+            EasyIMGUI.Space()
                 .AddTo(mRootLayout);
 
-            new LabelView(LocaleText.Comment)
+            EasyIMGUI.Label().Text(LocaleText.Comment)
                 .FontSize(12)
                 .AddTo(mRootLayout);
 
-            new SpaceView()
+            EasyIMGUI.Space()
                 .AddTo(mRootLayout);
 
-            new TextAreaView(mBindScript.Comment)
+            EasyIMGUI.TextArea()
+                .Text(mBindScript.Comment)
                 .Height(100)
                 .AddTo(mRootLayout)
                 .Content.Bind(newValue => mBindScript.CustomComment = newValue);
@@ -189,28 +190,26 @@ namespace QFramework
             var rootGameObj = CodeGenUtil.GetBindBelongs2GameObject(bind);
 
 
-            if (rootGameObj.transform.GetComponent("ILKitBehaviour")) 
+            if (rootGameObj.transform.GetComponent("ILKitBehaviour"))
             {
-                
             }
             else if (rootGameObj.transform.IsUIPanel())
             {
-                new ButtonView(LocaleText.Generate + " " + CodeGenUtil.GetBindBelongs2(bind),
-                        () =>
-                        {
-                            var rootPrefabObj = PrefabUtility.GetPrefabParent(rootGameObj);
-                            UICodeGenerator.DoCreateCode(new[] {rootPrefabObj});
-                        })
+                EasyIMGUI.Button()
+                    .Text(LocaleText.Generate + " " + CodeGenUtil.GetBindBelongs2(bind))
+                    .OnClick(() =>
+                    {
+                        var rootPrefabObj = PrefabUtility.GetPrefabParent(rootGameObj);
+                        UICodeGenerator.DoCreateCode(new[] {rootPrefabObj});
+                    })
                     .Height(30)
                     .AddTo(mRootLayout);
             }
             else if (rootGameObj.transform.IsViewController())
             {
-                new ButtonView(LocaleText.Generate + " " + CodeGenUtil.GetBindBelongs2(bind),
-                        () =>
-                        {
-                            CreateViewControllerCode.DoCreateCodeFromScene(bind.gameObject);
-                        })
+                EasyIMGUI.Button()
+                    .Text(LocaleText.Generate + " " + CodeGenUtil.GetBindBelongs2(bind))
+                    .OnClick(() => { CreateViewControllerCode.DoCreateCodeFromScene(bind.gameObject); })
                     .Height(30)
                     .AddTo(mRootLayout);
             }
