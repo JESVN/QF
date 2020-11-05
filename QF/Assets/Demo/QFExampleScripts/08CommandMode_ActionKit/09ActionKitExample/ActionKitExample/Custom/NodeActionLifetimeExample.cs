@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+
 namespace QFramework.Example.ActionKit
 {
-	public class NodeActionLifetimeAction : Action
+	public class ActionLifetimeAction : Action
 	{
 		protected override void OnReset()
 		{
@@ -51,7 +52,7 @@ namespace QFramework.Example.ActionKit
 
 		void Start()
 		{
-			var lifetimeAction = new NodeActionLifetimeAction();
+			var lifetimeAction = new ActionLifetimeAction();
 			
 			this.Repeat(1)
 				.Append(lifetimeAction)

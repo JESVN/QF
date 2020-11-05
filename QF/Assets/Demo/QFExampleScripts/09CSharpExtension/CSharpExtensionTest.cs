@@ -13,7 +13,6 @@ public class CSharpExtensionTest : MonoBehaviour
                 IOExtension.OpenFolder(@"F:\FTP_Server");
             })
             .Begin();
-        
         // traditional style
         var playerPrefab = Resources.Load<GameObject>("playerPrefab");
         var playerObj = Instantiate(playerPrefab);

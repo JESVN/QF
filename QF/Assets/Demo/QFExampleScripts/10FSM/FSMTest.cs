@@ -87,39 +87,59 @@ public class FSMTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        #region MyRegion
+
         FSM<PlayerStateEvent.PlayerState, PlayerStateEvent.PlayerEvent> fsm = new FSM<PlayerStateEvent.PlayerState, PlayerStateEvent.PlayerEvent>();
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToRunEvent,PlayerStateEvent.PlayerState.run,
-            data => { "待机到跑动的执行".LogInfo();});
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToRunEvent,PlayerStateEvent.PlayerState.run,
+        //     data => { "待机到跑动的执行".LogInfo();});
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToJumpEvent,PlayerStateEvent.PlayerState.jump,
-            data => { "待机到跳跃的执行".LogInfo();});
-        
-        fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToAttackEvent,PlayerStateEvent.PlayerState.attack,
-            data => { "待机到攻击的执行".LogInfo();});
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToJumpEvent,PlayerStateEvent.PlayerState.jump,
+        //     data => { "待机到跳跃的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToAttackEvent,PlayerStateEvent.PlayerState.attack,
+        //     data => { "待机到攻击的执行".LogInfo();});
         
         fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToJumpEvent,PlayerStateEvent.PlayerState.jump,
             data => { "跑动到跳跃的执行".LogInfo();});
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToAttackEvent,PlayerStateEvent.PlayerState.attack,
-            data => { "跑动到攻击的执行".LogInfo();});
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToAttackEvent,PlayerStateEvent.PlayerState.attack,
+        //     data => { "跑动到攻击的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToIdleEvent,PlayerStateEvent.PlayerState.idle,
+        //     data => { "跑动到待机的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.attack,PlayerStateEvent.PlayerEvent.attackToIdleEvent,PlayerStateEvent.PlayerState.idle,
+        //     data => { "攻击到待机的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToDieEvent,PlayerStateEvent.PlayerState.die,
+        //     data => { "待机到死亡的执行".LogInfo();});
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToDieEvent,PlayerStateEvent.PlayerState.die,
+        //     data => { "跑动到死亡的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.jump,PlayerStateEvent.PlayerEvent.jumpToDieEvent,PlayerStateEvent.PlayerState.die,
+        //     data => { "跳跃到死亡的执行".LogInfo();});
+        //
+        // fsm.AddTransition(PlayerStateEvent.PlayerState.attack,PlayerStateEvent.PlayerEvent.attackToDieEvent,PlayerStateEvent.PlayerState.die,
+        //     data => { "攻击到死亡的执行".LogInfo();});
+        Debug.Log($"{fsm.State}");
+        fsm.HandleEvent(PlayerStateEvent.PlayerEvent.runToJumpEvent);
+
+        #endregion
+    }
+
+    public void Jump()
+    {
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToIdleEvent,PlayerStateEvent.PlayerState.idle,
-            data => { "跑动到待机的执行".LogInfo();});
+    }
+
+    public void DoubleJump()
+    {
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.attack,PlayerStateEvent.PlayerEvent.attackToIdleEvent,PlayerStateEvent.PlayerState.idle,
-            data => { "攻击到待机的执行".LogInfo();});
+    }
+
+    public void Run()
+    {
         
-        fsm.AddTransition(PlayerStateEvent.PlayerState.idle,PlayerStateEvent.PlayerEvent.idleToDieEvent,PlayerStateEvent.PlayerState.die,
-            data => { "待机到死亡的执行".LogInfo();});
-        fsm.AddTransition(PlayerStateEvent.PlayerState.run,PlayerStateEvent.PlayerEvent.runToDieEvent,PlayerStateEvent.PlayerState.die,
-            data => { "跑动到死亡的执行".LogInfo();});
-        
-        fsm.AddTransition(PlayerStateEvent.PlayerState.jump,PlayerStateEvent.PlayerEvent.jumpToDieEvent,PlayerStateEvent.PlayerState.die,
-            data => { "跳跃到死亡的执行".LogInfo();});
-        
-        fsm.AddTransition(PlayerStateEvent.PlayerState.attack,PlayerStateEvent.PlayerEvent.attackToDieEvent,PlayerStateEvent.PlayerState.die,
-            data => { "攻击到死亡的执行".LogInfo();});
-        fsm.Start(PlayerStateEvent.PlayerState.attack);
     }
 }

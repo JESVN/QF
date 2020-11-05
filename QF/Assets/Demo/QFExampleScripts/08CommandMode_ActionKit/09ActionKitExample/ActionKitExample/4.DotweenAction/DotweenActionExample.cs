@@ -23,24 +23,24 @@
 //  * THE SOFTWARE.
 //  ****************************************************************************/
 //
-using DG.Tweening;
-using UnityEngine;
-
-namespace QFramework
-{
-	public class DotweenActionExample : MonoBehaviour
-	{
-		// Use this for initialization
-		void Start()
-		{
-			this.ExecuteNode(DOTweenAction.Allocate(() => this.transform.DOLocalMoveX(5, 5)));
-
-			this.Sequence()
-				.Delay(5.0f)
-				.Event(()=>"开始执行 Sequence 中的 Dotween".LogInfo())
-				.DOTween(() => transform.DOLocalMoveX(-5, 5))
-				.Event(()=>"结束执行 Sequence 中的 Dotween".LogInfo())
-				.Begin();
-		}
-	}
-}
+// using DG.Tweening;
+// using UnityEngine;
+//
+// namespace QFramework
+// {
+// 	public class DotweenActionExample : MonoBehaviour
+// 	{
+// 		// Use this for initialization
+// 		void Start()
+// 		{
+// 			this.ExecuteNode(DOTweenAction.Allocate(() => this.transform.DOLocalMoveX(5, 5)));
+//
+// 			this.Sequence()
+// 				.Delay(5.0f)
+// 				.Event(()=>"开始执行 Sequence 中的 Dotween".LogInfo())
+// 				.DOTween(() => transform.DOLocalMoveX(-5, 5))
+// 				.Event(()=>"结束执行 Sequence 中的 Dotween".LogInfo())
+// 				.Begin();
+// 		}
+// 	}
+// }
