@@ -8,7 +8,6 @@ namespace QFramework
     {
         public TableIndex<Type, ActionKitFSMTransition> SrcStateIndex =
             new TableIndex<Type, ActionKitFSMTransition>(t => t.SrcStateType);
-
         public TableIndex<Type, ActionKitFSMTransition> TypeIndex =
             new TableIndex<Type, ActionKitFSMTransition>(t => t.GetType());
 

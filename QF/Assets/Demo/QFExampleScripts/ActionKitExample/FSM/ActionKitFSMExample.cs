@@ -43,9 +43,13 @@ namespace QFramework.Example.ActionKit
 			{
 				Debug.Log("退出 跑 状态");
 			}
+
+			protected override void OnUpdate()
+			{
+				Debug.Log($"{"跑动中"}");	
+			}
 		}
-
-
+		
 		/// <summary>
 		/// 空格键按下 走=>跑
 		/// </summary>
@@ -61,7 +65,6 @@ namespace QFramework.Example.ActionKit
 		{
 			
 		}
-		
 		
 		/// <summary>
 		/// 状态机
@@ -89,7 +92,11 @@ namespace QFramework.Example.ActionKit
 			{
 				mFsm.HandleEvent<SpaceKeyDown>();
 			}
-
+			if (Input.GetKey(KeyCode.Space))
+			{
+				Debug.Log($"{mFsm.CurrentState is WalkState}");
+				mFsm.Update();
+			}
 			if (Input.GetKeyUp(KeyCode.Space))
 			{
 				mFsm.HandleEvent<SpaceKeyUp>();
