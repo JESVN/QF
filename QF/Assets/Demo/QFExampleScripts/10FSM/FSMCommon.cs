@@ -133,6 +133,10 @@ public class FSMCommon : MonoBehaviour
     /// <summary>
     /// 状态机
     /// </summary>
+    ///
+    ///
+    ///
+    /// 
     private ActionKitFSM fsm=new ActionKitFSM();
     // Start is called before the first frame update
     void Start()

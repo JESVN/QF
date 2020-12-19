@@ -10,7 +10,7 @@ public class CSharpExtensionTest : MonoBehaviour
             .Event(() =>
             {
                 "打开".LogInfo();
-                IOExtension.OpenFolder(@"F:\FTP_Server");
+                //IOExtension.OpenFolder(@"F:\FTP_Server");
             })
             .Begin();
         // traditional style
