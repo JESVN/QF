@@ -40,7 +40,6 @@ namespace QFramework
 
             if (!IsUnitTestMode && !Application.isPlaying) return instance;
             instance = Object.FindObjectOfType<T>();
-
             if (instance != null)
             {
                 instance.OnSingletonInit();

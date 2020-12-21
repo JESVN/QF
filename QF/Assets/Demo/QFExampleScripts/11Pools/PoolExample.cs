@@ -23,6 +23,7 @@ public class PoolExample : MonoBehaviour
     private bool isW;
     private bool isS;
     private GameObject enemy;
+    private bool isWall;
     
     [SerializeField][Range(0,5)] private int enemyCount;
     [SerializeField] private float speed=15;
@@ -141,10 +142,12 @@ public class PoolExample : MonoBehaviour
         Vector3 AboutToMove = transform.position + Time.deltaTime * dir * speed;
         if (GetPosion(AboutToMove))
         {
+            isWall=false;
             transform.position = AboutToMove;
         }
         else
         {
+            isWall=true;
             Die();
         }
     }
@@ -262,6 +265,11 @@ public class PoolExample : MonoBehaviour
             if (allTheTime == 0)
             {
                 transform.GetComponent<BoxCollider>().enabled = true;
+                if (isWall)
+                {
+                    isWall=false;
+                    Die();
+                }
                 break;
             }
         }
